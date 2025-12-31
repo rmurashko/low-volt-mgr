@@ -1,26 +1,83 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --brand-navy: #0f172a;
+  --brand-electric: #38bdf8;
+  --brand-slate: #64748b;
+  --brand-silver: #f8fafc;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--brand-navy);
+  background-color: var(--brand-silver);
+  /* Refined Tech Grid Pattern */
+  background-image: 
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px;
+  font-feature-settings: "cv02", "cv03", "cv04", "flat";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- VOLTMANAGER COMPONENT LIBRARY --- */
+@layer components {
+  /* The Main Action Button */
+  .btn-volt {
+    @apply flex items-center justify-center gap-2 px-6 py-3 
+           bg-[#0f172a] text-white rounded-2xl font-bold 
+           transition-all duration-200 active:scale-95
+           hover:bg-[#38bdf8] hover:text-[#0f172a] hover:shadow-lg 
+           hover:shadow-[#38bdf8]/20 disabled:opacity-30;
+  }
+
+  /* The Premium Container Card */
+  .card-volt {
+    @apply bg-white/80 backdrop-blur-md border-2 border-slate-100 
+           rounded-[2.5rem] p-8 shadow-sm transition-all duration-300
+           hover:shadow-xl hover:border-[#38bdf8]/30;
+  }
+
+  /* Secondary/Outline Button */
+  .btn-outline-volt {
+    @apply flex items-center justify-center gap-2 px-6 py-3 
+           border-2 border-slate-200 rounded-2xl font-bold 
+           text-slate-600 transition-all hover:bg-slate-50 
+           hover:border-slate-300 active:bg-slate-100;
+  }
+
+  /* Data/Quantity Typography */
+  .font-data {
+    @apply font-mono tracking-tighter font-black;
+  }
+
+  /* Navigation Tab Styling */
+  .nav-tab {
+    @apply px-6 py-3 rounded-xl text-[10px] font-black tracking-widest 
+           transition-all uppercase flex items-center gap-2;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--brand-navy);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border: 2px solid var(--brand-navy);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-electric);
+}
+
+/* Print Layout Optimization */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; background-image: none !important; }
+  .card-volt { border: 1px solid #e2e8f0 !important; border-radius: 8px !important; }
 }
